@@ -254,7 +254,7 @@
           "defaultFileName": "fichier",
           "defaultHeading": {
             "failed": "La tâche a échoué",
-            "success": "Succès !"
+            "success": "Félicitation !"
           },
           "defaultLabel": "Voir la ressource",
           "defaultMessage": {
