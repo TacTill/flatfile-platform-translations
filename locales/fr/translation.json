@@ -1064,5 +1064,15 @@
     "pill": {
       "hoverText": "Historique des versions"
     }
+  },
+  "submitAction": {
+    "label": "Importer",
+    "description": "Vous êtes sur le point d’importer vos données. Voulez-vous continuer ?",
+    "tooltip": "Importer vos données",
+    "info": "Test info message",
+    "outcome": {
+      "heading": "Félicitation !",
+      "message": "Les données ont bien été reçues. Le traitement de votre demande a commencé."
+    }
   }
 }
