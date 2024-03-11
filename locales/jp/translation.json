@@ -1,4 +1,17 @@
 {
+  "blocks": {
+    "embeddedDiff": {
+      "errors": {
+        "invalidDirection": "'direction' プロパティが無効なため、埋め込みDiffを作成できません。有効な値は：'sheet_to_snapshot'、'snapshot_to_sheet' です。",
+        "missingIds": "シート、ワークブック、またはスナップショットIDが見つからないため、埋め込みDiffを作成できません"
+      }
+    },
+    "embeddedSheet": {
+      "errors": {
+        "missingIds": "シートまたはワークブックIDが見つからないため、埋め込みシートを作成できません。"
+      }
+    }
+  },
   "checklist": {
     "dropdowns": {
       "headings": {
@@ -131,6 +144,7 @@
     "notFoundPageDescription": "このURLにはページが存在しません。これが予期しないことである場合は、サポートにお問い合わせください。",
     "refreshButton": "再試行",
     "refreshPageDescription": "ページを更新して再試行してください。問題が解決しない場合は、サポートにお問い合わせください。",
+    "sessionExpired": "セッションは期限切れとなりました",
     "sheetNotFound": "シートが見つかりません",
     "spaceNotFound": "スペースが見つかりません",
     "unauthorized": "アクセス資格情報が無効です。",
@@ -375,6 +389,9 @@
       "heading": "{{previewKey}}のデータプレビュー",
       "noData": "プレビューデータがありません"
     },
+    "dropdown": {
+      "placeholder": "選択.."
+    },
     "headerButtons": {
       "back": "戻る",
       "exit": "終了",
@@ -394,10 +411,10 @@
         "noData": "データのないセル",
         "noDataTooltip": "有効なオプションを選択して、すべての空のセルを設定できます。これを空白のままにすることもできます。"
       },
-      "progressPill_other": "{{mappedCount}}/{{totalCount}} の値がマッピングされました",
-      "progressPill_zero": "{{mappedCount}}/{{totalCount}} の値がマッピングされました",
-      "progressPillAllMapped_other": "{{totalCount}} の値がマッピングされました",
-      "progressPillAllMapped_zero": "{{totalCount}} の値がマッピングされました",
+      "progressPill_other": "{{mappedCount}}/{{count}} の値がマッピングされました",
+      "progressPill_zero": "{{mappedCount}}/{{count}} の値がマッピングされました",
+      "progressPillAllMapped_other": "{{count}} の値がマッピングされました",
+      "progressPillAllMapped_zero": "{{count}} の値がマッピングされました",
       "subheading": "これらのフィールドには、有効なオプションのリストにマップする必要がある値が含まれています。",
       "title": "マップフィールド"
     },
@@ -537,6 +554,9 @@
         },
         "messages": {
           "autogen": "✨自動生成されました",
+          "compositeUnique": "🧑‍🍳 複合 {{name}} は一意ではありません",
+          "invalidOption": "無効なオプション",
+          "invalidValue": "値は有効なオプションではありません",
           "reference": "値が参照テーブルに存在しません",
           "req": "{{field}} が必要です",
           "transformed": "🪄️ {{originalValue}} から変換されました",
@@ -791,6 +811,7 @@
         "tooltip": "Enterキーを押して検索"
       },
       "tooltips": {
+        "lockedUntilEditingCompletes": "ツールバーは、シートが編集されていないときに使用できるようになります。",
         "lockedUntilHookCompletes": "ツールバーは、すべてのフックの実行が終了した後に利用可能になります",
         "lockedUntilJobCompletes": "ツールバーは、現在のジョブが完了した後に利用可能になります"
       }
@@ -798,6 +819,7 @@
     "workbookActions": {
       "disabledTooltip": {
         "hasData": "このアクションは、このワークブックに少なくとも1つのレコードが存在すると使用可能になります。",
+        "lockedUntilEditingCompletes": "このアクションは、シートが編集されていないときに使用可能になります。",
         "lockedUntilHookCompletes": "このアクションは、すべてのフックの実行が完了した後に使用可能になります。",
         "lockedUntilJobCompletes": "このアクションは、現在のジョブが完了した後に使用可能になります",
         "requireAllValid": "この操作では、すべてのシートのすべての行が有効である必要があります"
@@ -878,9 +900,60 @@
         "accept": "変更を受け入れると、すべての新しい値がデータセットにマージされます。",
         "current": "現在の値：{{value}}",
         "empty": "データなし",
+        "none": "データセットは表示された値に変更されます。",
         "restore": "データセットは、このスナップショットのバージョンに復元されます。",
         "snapshot": "新しい値：{{value}}"
       }
+    },
+    "none": {
+      "empty": {
+        "createdSince": "記録は削除されません。",
+        "deletedSince": "記録は追加されません。",
+        "title": "見るべきものは何もありません！",
+        "updatedSince": "記録は変更されません。"
+      },
+      "errorMessage": "予期せぬエラーにより、変更をプレビューできませんでした。",
+      "filters": {
+        "createdSince": "削除",
+        "deletedSince": "追加",
+        "updatedSince": "変更"
+      },
+      "header": {
+        "title": "以下における変更点：",
+        "titleWithMeta": "<1>{{sheet}}</1>の変更を見直す"
+      },
+      "message": "以下の表は、{{name}}シートの変更点を示しています。",
+      "submitError": "予期せぬエラーにより、データを変換できませんでした。",
+      "submitSuccess": "シートの変更が正常に適用されました。",
+      "successMessage": "変更がシートに適用されました。",
+      "summary": {
+        "fields": {
+          "plural": {
+            "first": "フィールド{{name}}の{{cells}}セル",
+            "last": " とフィールド{{name}}の{{cells}}セル",
+            "middle": "、フィールド{{name}}の{{cells}}セル"
+          },
+          "singular": {
+            "first": "フィールド{{name}}の1セル",
+            "last": " とフィールド{{name}}の1セル",
+            "middle": "、フィールド{{name}}の1セル"
+          },
+          "start": " データは以下において変更されます： "
+        },
+        "total": {
+          "plural": {
+            "multipleFields": "データは{{fields}}フィールドにわたって{{records}}件の記録で変更されます。",
+            "noFields": "データは{{records}}件の記録で変更されます。",
+            "oneField": "データは1フィールドにわたって{{records}}件の記録で変更されます。"
+          },
+          "singular": {
+            "multipleFields": "データは{{fields}}フィールドにわたって1件の記録で変更されます。",
+            "noFields": "データは1件の記録で変更されます。",
+            "oneField": "データは1フィールドにわたって1件の記録で変更されます。"
+          }
+        }
+      },
+      "title": "以下で行った変更をプレビューする："
     },
     "preview": {
       "cancelButton": "キャンセル",

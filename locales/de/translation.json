@@ -1,4 +1,17 @@
 {
+  "blocks": {
+    "embeddedDiff": {
+      "errors": {
+        "invalidDirection": "Eingebettetes Diff kann nicht erstellt werden, da die Eigenschaft „Richtung“ ungültig ist. Gültige Werte sind: „Blatt_zu_Snapshot“, „Snapshot_zu_Blatt“.",
+        "missingIds": "Eingebetteter Diff kann wegen fehlender Blatt-, Arbeitsmappen- oder Snapshot-ID nicht erstellt werden."
+      }
+    },
+    "embeddedSheet": {
+      "errors": {
+        "missingIds": "Eingebettetes Blatt kann nicht erstellt werden, da die Blatt- oder Arbeitsmappen-ID fehlt."
+      }
+    }
+  },
   "checklist": {
     "dropdowns": {
       "headings": {
@@ -132,6 +145,7 @@
     "notFoundPageDescription": "Es existiert keine Seite unter dieser URL. Wenden Sie sich bitte an den Support, falls dies unerwartet sein sollte.",
     "refreshButton": "Erneut versuchen",
     "refreshPageDescription": "Aktualisieren Sie die Seite und versuchen Sie es erneut. Wenn das Problem weiterhin besteht, wenden Sie sich bitte an den Support.",
+    "sessionExpired": "Die Sitzung ist abgelaufen",
     "sheetNotFound": "Arbeitsblatt nicht gefunden",
     "spaceNotFound": "Bereich nicht gefunden",
     "unauthorized": "Ihre Zugangsdaten sind ungültig.",
@@ -380,6 +394,9 @@
       "heading": "Datenvorschau für {{previewKey}}",
       "noData": "Keine Vorschaudaten"
     },
+    "dropdown": {
+      "placeholder": "Wählen Sie aus ..."
+    },
     "headerButtons": {
       "back": "Zurück",
       "exit": "Beenden",
@@ -399,12 +416,12 @@
         "noData": "Zellen ohne Daten",
         "noDataTooltip": "Sie können eine gültige Option auswählen, um alle leeren Zellen auszufüllen. Dieses Feld kann auch leer gelassen werden."
       },
-      "progressPill_one": "{{mappedCount}} von {{totalCount}} Wert zugeordnet",
-      "progressPill_other": "{{mappedCount}} von {{totalCount}} Werten zugeordnet",
-      "progressPill_zero": "{{mappedCount}} von {{totalCount}} Werten zugeordnet",
-      "progressPillAllMapped_one": "{{totalCount}} Werte zugeordnet",
-      "progressPillAllMapped_other": "{{totalCount}} Wert zugeordnet",
-      "progressPillAllMapped_zero": "{{totalCount}} Wert zugeordnet",
+      "progressPill_one": "{{mappedCount}} von {{count}} Wert zugeordnet",
+      "progressPill_other": "{{mappedCount}} von {{count}} Werten zugeordnet",
+      "progressPill_zero": "{{mappedCount}} von {{count}} Werten zugeordnet",
+      "progressPillAllMapped_one": "{{count}} Werte zugeordnet",
+      "progressPillAllMapped_other": "{{count}} Wert zugeordnet",
+      "progressPillAllMapped_zero": "{{count}} Wert zugeordnet",
       "subheading": "Diese Felder haben Werte, die einer Liste gültiger Optionen zugeordnet werden müssen.",
       "title": "Felder zuordnen"
     },
@@ -554,6 +571,9 @@
         },
         "messages": {
           "autogen": "✨ Automatisch generiert",
+          "compositeUnique": "🧑‍🍳 Das Kompositum {{name}} ist nicht einzigartig",
+          "invalidOption": "Unzulässige Option",
+          "invalidValue": "Der Wert ist keine zulässige Option",
           "reference": "Der Wert existiert in der Referenztabelle nicht",
           "req": "{{field}} ist erforderlich",
           "transformed": "🪄️ Transformiert aus {{originalValue}}",
@@ -816,6 +836,7 @@
         "tooltip": "Zum Suchen die Entertaste drücken"
       },
       "tooltips": {
+        "lockedUntilEditingCompletes": "Die Werkzeugleiste steht zur Verfügung, wenn das Blatt nicht mehr bearbeitet wird",
         "lockedUntilHookCompletes": "Die Symbolleiste ist erst wieder verfügbar, wenn alle Hooks ausgeführt wurden.",
         "lockedUntilJobCompletes": "Die Symbolleiste wird nach Abschluss des aktuellen Auftrags verfügbar sein"
       }
@@ -823,6 +844,7 @@
     "workbookActions": {
       "disabledTooltip": {
         "hasData": "Diese Aktion ist verfügbar, sobald in dieser Arbeitsmappe mindestens ein Eintrag vorhanden ist.",
+        "lockedUntilEditingCompletes": "Die Aktion steht zur Verfügung, wenn das Blatt nicht mehr bearbeitet wird",
         "lockedUntilHookCompletes": "Diese Aktion ist verfügbar, nachdem alle Hooks ausgeführt wurden",
         "lockedUntilJobCompletes": "Diese Aktion ist verfügbar, wenn der aktuelle Auftrag abgeschlossen ist.",
         "requireAllValid": "Für diese Aktion müssen alle Zeilen in allen Blättern gültig sein"
@@ -903,9 +925,60 @@
         "accept": "Wenn Sie die Änderungen akzeptieren, werden alle neuen Werte in Ihren Datensatz übernommen.",
         "current": "Aktueller Wert: {{value}}",
         "empty": "keine Daten",
+        "none": "Ihr Datensatz wird mit den angezeigten Werten geändert.",
         "restore": "Ihr Datensatz wird mit der Version in diesem Snapshot wiederhergestellt.",
         "snapshot": "Neuer Wert: {{value}}"
       }
+    },
+    "none": {
+      "empty": {
+        "createdSince": "Es werden keine Datensätze entfernt.",
+        "deletedSince": "Es werden keine Datensätze hinzugefügt.",
+        "title": "Nichts zu sehen!",
+        "updatedSince": "Es werden keine Datensätze geändert."
+      },
+      "errorMessage": "Die Änderungen konnten aufgrund eines unerwarteten Fehlers nicht in der Vorschau angezeigt werden.",
+      "filters": {
+        "createdSince": "Entfernen",
+        "deletedSince": "Hinzufügen",
+        "updatedSince": "Ändern"
+      },
+      "header": {
+        "title": "Änderungen vorgenommen in",
+        "titleWithMeta": "Überprüfen Sie die Änderungen an <1>{{sheet}}</1>"
+      },
+      "message": "Die folgende Tabelle zeigt die Änderungen an Ihrem Blatt {{name}}.",
+      "submitError": "Die Daten konnten aufgrund eines unerwarteten Fehlers nicht transformiert werden.",
+      "submitSuccess": "Die Änderungen an Ihrem Blatt wurden erfolgreich angewendet.",
+      "successMessage": "Die Änderungen wurden auf Ihr Blatt angewendet.",
+      "summary": {
+        "fields": {
+          "plural": {
+            "first": "{{cells}} Zellen im Feld {{name}}",
+            "last": " und {{cells}} Zellen in Feld {{name}}",
+            "middle": ", {{cells}} Zellen in Feld {{name}}"
+          },
+          "singular": {
+            "first": "1 Zelle in Feld {{name}}",
+            "last": " und 1 Zelle in Feld {{name}}",
+            "middle": ", 1 Zelle in Feld {{name}}"
+          },
+          "start": " Daten werden geändert in "
+        },
+        "total": {
+          "plural": {
+            "multipleFields": "Daten ändern sich in {{records}} Datensätzen über {{fields}} Felder.",
+            "noFields": "Daten ändern sich in {{records}} Datensätzen.",
+            "oneField": "Daten ändern sich in {{records}} Datensätzen über 1 Feld."
+          },
+          "singular": {
+            "multipleFields": "Daten ändern sich in 1 Datensatz über {{fields}} Felder.",
+            "noFields": "Daten ändern sich in 1 Datensatz.",
+            "oneField": "Daten ändern sich in 1 Datensatz in 1 Feld."
+          }
+        }
+      },
+      "title": "Vorschau der Änderungen in"
     },
     "preview": {
       "cancelButton": "Abbrechen",

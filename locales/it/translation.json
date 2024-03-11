@@ -1,4 +1,17 @@
 {
+  "blocks": {
+    "embeddedDiff": {
+      "errors": {
+        "invalidDirection": "Impossibile creare Embedded Diff a causa di un valore 'direction' non valido. I valori validi sono: 'sheet_to_snapshot', 'snapshot_to_sheet'",
+        "missingIds": "Impossibile creare Embedded Diff a causa dell'assenza dell'ID del Foglio, del Workbook o dello Snapshot"
+      }
+    },
+    "embeddedSheet": {
+      "errors": {
+        "missingIds": "Impossibile creare Embedded Sheet a causa dell'assenza dell'ID del Foglio o del Workbook."
+      }
+    }
+  },
   "checklist": {
     "dropdowns": {
       "headings": {
@@ -132,6 +145,7 @@
     "notFoundPageDescription": "Non esiste alcuna pagina a questo URL. Se ciò è inaspettato, contatta l'assistenza.",
     "refreshButton": "Riprova",
     "refreshPageDescription": "Aggiorna la pagina per riprovare. Se il problema persiste, contatta il supporto.",
+    "sessionExpired": "La sessione è scaduta",
     "sheetNotFound": "Foglio non trovato",
     "spaceNotFound": "Spazio non trovato",
     "unauthorized": "Le tue credenziali di accesso non sono valide.",
@@ -380,6 +394,9 @@
       "heading": "Anteprima dei dati per {{previewKey}}",
       "noData": "Nessun dato in anteprima"
     },
+    "dropdown": {
+      "placeholder": "Seleziona..."
+    },
     "headerButtons": {
       "back": "Indietro",
       "exit": "Esci",
@@ -399,12 +416,12 @@
         "noData": "Celle senza dati",
         "noDataTooltip": "Puoi selezionare un'opzione valida per popolare tutte le celle vuote. Puoi anche lasciare questo spazio vuoto."
       },
-      "progressPill_one": "{{mappedCount}} di {{totalCount}} valore mappato",
-      "progressPill_other": "{{mappedCount}} di {{totalCount}} valori mappati",
-      "progressPill_zero": "{{mappedCount}} di {{totalCount}} valori mappati",
-      "progressPillAllMapped_one": "{{totalCount}} valori mappati",
-      "progressPillAllMapped_other": "{{totalCount}} valore mappato",
-      "progressPillAllMapped_zero": "{{totalCount}} valore mappato",
+      "progressPill_one": "{{mappedCount}} di {{count}} valore mappato",
+      "progressPill_other": "{{mappedCount}} di {{count}} valori mappati",
+      "progressPill_zero": "{{mappedCount}} di {{count}} valori mappati",
+      "progressPillAllMapped_one": "{{count}} valori mappati",
+      "progressPillAllMapped_other": "{{count}} valore mappato",
+      "progressPillAllMapped_zero": "{{count}} valore mappato",
       "subheading": "Questi campi hanno valori che devono essere mappati su una lista di opzioni valide.",
       "title": "Mappa i campi"
     },
@@ -554,6 +571,9 @@
         },
         "messages": {
           "autogen": "✨ Generato automaticamente",
+          "compositeUnique": "🧑‍🍳 Il {{name}} composito non è univoco",
+          "invalidOption": "Opzione non valida",
+          "invalidValue": "Il valore non è un'opzione valida",
           "reference": "Il valore non esiste nella tabella di riferimento",
           "req": "{{field}} è richiesto",
           "transformed": "🪄️ Trasformato da {{originalValue}}",
@@ -816,6 +836,7 @@
         "tooltip": "Premi invio per cercare"
       },
       "tooltips": {
+        "lockedUntilEditingCompletes": "La barra degli strumenti sarà disponibile quando il foglio non sarà più modificato",
         "lockedUntilHookCompletes": "La barra degli strumenti sarà disponibile dopo il completamento di tutti gli hook",
         "lockedUntilJobCompletes": "La barra degli strumenti sarà disponibile dopo il completamento del lavoro corrente"
       }
@@ -823,6 +844,7 @@
     "workbookActions": {
       "disabledTooltip": {
         "hasData": "Tale azione diventerà disponibile quando ci sarà almeno un record in questa cartella di lavoro.",
+        "lockedUntilEditingCompletes": "L'azione sarà disponibile quando il foglio non sarà più modificato",
         "lockedUntilHookCompletes": "Questa azione sarà disponibile dopo che tutti i ganci avranno terminato l'esecuzione.",
         "lockedUntilJobCompletes": "Questa azione sarà disponibile dopo il completamento del lavoro corrente.",
         "requireAllValid": "Questa azione richiede che tutte le righe in tutti i fogli siano valide"
@@ -903,9 +925,60 @@
         "accept": "Se accetti le modifiche, tutti i nuovi valori verranno uniti al tuo dataset.",
         "current": "Valore attuale: {{value}}",
         "empty": "nessun dato",
+        "none": "Il tuo dataset verrà modificato ai valori mostrati.",
         "restore": "Il tuo gruppo di dati sarà ripristinato alla versione contenuta in questa istantanea.",
         "snapshot": "Nuovo valore: {{value}}"
       }
+    },
+    "none": {
+      "empty": {
+        "createdSince": "Nessun record verrà rimosso.",
+        "deletedSince": "Nessun record verrà aggiunto.",
+        "title": "Niente da vedere!",
+        "updatedSince": "Nessun record verrà modificato."
+      },
+      "errorMessage": "Le modifiche non hanno potuto essere visualizzate a causa di un errore inaspettato.",
+      "filters": {
+        "createdSince": "Rimuovi",
+        "deletedSince": "Aggiungi",
+        "updatedSince": "Modifica"
+      },
+      "header": {
+        "title": "Modifiche effettuate in",
+        "titleWithMeta": "Rivedi le modifiche a <1>{{sheet}}</1>"
+      },
+      "message": "La tabella sottostante mostra le modifiche al tuo foglio {{name}}.",
+      "submitError": "I dati non hanno potuto essere trasformati a causa di un errore inaspettato.",
+      "submitSuccess": "Le modifiche al tuo foglio sono state applicate con successo.",
+      "successMessage": "Le modifiche sono state applicate al tuo foglio.",
+      "summary": {
+        "fields": {
+          "plural": {
+            "first": "{{cells}} celle nel campo {{name}}",
+            "last": " e {{cells}} celle nel campo {{name}}",
+            "middle": ", {{cells}} celle nel campo {{name}}"
+          },
+          "singular": {
+            "first": "1 cella nel campo {{name}}",
+            "last": " e 1 cella nel campo {{name}}",
+            "middle": ", 1 cella nel campo {{name}}"
+          },
+          "start": " I dati verranno modificati in "
+        },
+        "total": {
+          "plural": {
+            "multipleFields": "I dati cambieranno in {{records}} record attraverso {{fields}} campi.",
+            "noFields": "I dati cambieranno in {{records}} record.",
+            "oneField": "I dati cambieranno in {{records}} record attraverso 1 campo."
+          },
+          "singular": {
+            "multipleFields": "I dati cambieranno in 1 record attraverso {{fields}} campi.",
+            "noFields": "I dati cambieranno in 1 record.",
+            "oneField": "I dati cambieranno in 1 record attraverso 1 campo."
+          }
+        }
+      },
+      "title": "Anteprima delle modifiche effettuate in"
     },
     "preview": {
       "cancelButton": "Cancella",

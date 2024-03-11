@@ -1,4 +1,17 @@
 {
+  "blocks": {
+    "embeddedDiff": {
+      "errors": {
+        "invalidDirection": "Impossible de créer un différentiel intégré en raison d'une propriété 'direction' invalide. Les valeurs valides sont : 'sheet_to_snapshot', 'snapshot_to_sheet'",
+        "missingIds": "Impossible de créer une comparaison intégrée en raison d'un identifiant de feuille, de classeur ou d'instantané manquant"
+      }
+    },
+    "embeddedSheet": {
+      "errors": {
+        "missingIds": "Impossible de créer une feuille intégrée en raison d'un identifiant de feuille ou de classeur manquant."
+      }
+    }
+  },
   "checklist": {
     "dropdowns": {
       "headings": {
@@ -132,6 +145,7 @@
     "notFoundPageDescription": "Aucune page n'existe à cette URL. Si ce résultat est inattendu, veuillez contacter le service d'assistance.",
     "refreshButton": "Réessayer",
     "refreshPageDescription": "Actualiser la page pour réessayer. Si le problème persiste, contactez l'assistance.",
+    "sessionExpired": "La session a expiré",
     "sheetNotFound": "Feuille introuvable",
     "spaceNotFound": "Espace introuvable",
     "unauthorized": "Vos identifiants de connexion sont incorrects.",
@@ -380,6 +394,9 @@
       "heading": "Aperçu des données pour {{previewKey}}",
       "noData": "Aucune donnée d'aperçu"
     },
+    "dropdown": {
+      "placeholder": "Sélectionner..."
+    },
     "headerButtons": {
       "back": "Retour",
       "exit": "Quitter",
@@ -399,12 +416,12 @@
         "noData": "Cellules vides",
         "noDataTooltip": "Vous pouvez sélectionner une option valide pour remplir toutes les cellules vides. Vous pouvez également laisser ce champ vide."
       },
-      "progressPill_one": "{{mappedCount}} de {{totalCount}} valeur mise en correspondance",
-      "progressPill_other": "{{mappedCount}} de {{totalCount}} valeurs mises en correspondance",
-      "progressPill_zero": "{{mappedCount}} de {{totalCount}} valeurs mises en correspondance",
-      "progressPillAllMapped_one": "{{totalCount}} valeurs mises en correspondance",
-      "progressPillAllMapped_other": "{{totalCount}} valeur mise en correspondance",
-      "progressPillAllMapped_zero": "{{totalCount}} valeur mise en correspondance",
+      "progressPill_one": "{{mappedCount}} de {{count}} valeur mise en correspondance",
+      "progressPill_other": "{{mappedCount}} de {{count}} valeurs mises en correspondance",
+      "progressPill_zero": "{{mappedCount}} de {{count}} valeurs mises en correspondance",
+      "progressPillAllMapped_one": "{{count}} valeurs mises en correspondance",
+      "progressPillAllMapped_other": "{{count}} valeur mise en correspondance",
+      "progressPillAllMapped_zero": "{{count}} valeur mise en correspondance",
       "subheading": "Ces champs contiennent des valeurs qui doivent être mises en correspondance avec une liste d'options valides.",
       "title": "Mettre les champs en correspondance"
     },
@@ -554,6 +571,9 @@
         },
         "messages": {
           "autogen": "✨ Générée automatiquement",
+          "compositeUnique": "🧑‍🍳 Le composite {{name}} n'est pas unique",
+          "invalidOption": "Option invalide",
+          "invalidValue": "La valeur n'est pas une option valable",
           "reference": "La valeur n'existe pas dans le tableau de référence",
           "req": "{{field}} est obligatoire",
           "transformed": "🪄️ Transformée à partir de {{originalValue}}",
@@ -816,6 +836,7 @@
         "tooltip": "Appuyez sur Entrée pour lancer la recherche"
       },
       "tooltips": {
+        "lockedUntilEditingCompletes": "La barre d'outils sera disponible lorsque la feuille ne sera plus en cours de modification",
         "lockedUntilHookCompletes": "La barre d'outils sera disponible une fois que tous les hooks auront été exécutés",
         "lockedUntilJobCompletes": "La barre d'outils sera disponible une fois que le travail en cours sera terminé"
       }
@@ -823,6 +844,7 @@
     "workbookActions": {
       "disabledTooltip": {
         "hasData": "Cette action sera disponible dès lors qu'il y aura au moins un enregistrement dans ce classeur.",
+        "lockedUntilEditingCompletes": "L'action sera disponible lorsque la feuille ne sera plus en cours de modification",
         "lockedUntilHookCompletes": "Cette action sera disponible une fois que tous les hooks auront été exécutés",
         "lockedUntilJobCompletes": "Cette action sera disponible après la fin du travail en cours",
         "requireAllValid": "Cette action requiert que toutes les lignes de tous les tableurs soient valides."
@@ -903,9 +925,60 @@
         "accept": "Si vous acceptez les modifications, les nouvelles valeurs seront fusionnées dans votre ensemble de données.",
         "current": "Valeur actuelle :{{value}}",
         "empty": "aucune donnée",
+        "none": "Votre ensemble de données sera modifié selon les valeurs affichées.",
         "restore": "Votre ensemble de données sera restauré à la version dans cette image.",
         "snapshot": "Nouvelle valeur : {{value}}"
       }
+    },
+    "none": {
+      "empty": {
+        "createdSince": "Aucune ligne de données ne sera supprimée.",
+        "deletedSince": "Aucune ligne de données ne sera ajoutée.",
+        "title": "Rien à voir ici !",
+        "updatedSince": "Aucune ligne de données ne sera modifiée."
+      },
+      "errorMessage": "Les modifications n'ont pas pu être prévisualisées en raison d'une erreur inattendue.",
+      "filters": {
+        "createdSince": "Supprimer",
+        "deletedSince": "Ajouter",
+        "updatedSince": "Modifier"
+      },
+      "header": {
+        "title": "Modifications apportées dans",
+        "titleWithMeta": "Examiner les modifications apportées à <1>{{sheet}}</1>"
+      },
+      "message": "Le tableau ci-dessous montre les modifications apportées à votre feuille {{name}}.",
+      "submitError": "Les données n'ont pas pu être transformées en raison d'une erreur inattendue.",
+      "submitSuccess": "Les modifications apportées à votre feuille ont été appliquées avec succès.",
+      "successMessage": "Les modifications ont été appliquées à votre feuille.",
+      "summary": {
+        "fields": {
+          "plural": {
+            "first": "{{cells}} cellules dans le champ {{name}}",
+            "last": " et {{cells}} cellules dans le champ {{name}}",
+            "middle": ", {{cells}} cellules dans le champ {{name}}"
+          },
+          "singular": {
+            "first": "1 cellule dans le champ {{name}}",
+            "last": " et 1 cellule dans le champ {{name}}",
+            "middle": ", 1 cellule dans le champ {{name}}"
+          },
+          "start": " Les données seront modifiées dans "
+        },
+        "total": {
+          "plural": {
+            "multipleFields": "Les données changeront dans les lignes de données {{records}} dans les champs {{fields}}.",
+            "noFields": "Les données changeront dans les lignes de données {{records}}.",
+            "oneField": "Les données changeront dans les lignes de données {{records}} dans un champ."
+          },
+          "singular": {
+            "multipleFields": "Les données changeront dans une ligne de données dans les champs {{fields}}.",
+            "noFields": "Les données changeront dans une ligne de données.",
+            "oneField": "Les données changeront dans une ligne de données dans un champ."
+          }
+        }
+      },
+      "title": "Aperçu des modifications apportées dans"
     },
     "preview": {
       "cancelButton": "Annuler",

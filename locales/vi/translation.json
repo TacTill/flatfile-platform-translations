@@ -1,4 +1,17 @@
 {
+  "blocks": {
+    "embeddedDiff": {
+      "errors": {
+        "invalidDirection": "Không thể tạo Điểm khác biệt nhúng do thuộc tính 'direction' không hợp lệ. Các giá trị hợp lệ là: 'sheet_to_snapshot', 'snapshot_to_sheet'",
+        "missingIds": "Không thể tạo Điểm khác biệt nhúng do thiếu ID trang tính, sổ làm việc hoặc ảnh chụp"
+      }
+    },
+    "embeddedSheet": {
+      "errors": {
+        "missingIds": "Không thể tạo Trang tính nhúng do thiếu ID trang tính hoặc sổ làm việc."
+      }
+    }
+  },
   "checklist": {
     "dropdowns": {
       "headings": {
@@ -131,6 +144,7 @@
     "notFoundPageDescription": "Không có trang nào tồn tại tại URL này. Nếu đây là vấn đề ngoài dự kiến, vui lòng liên hệ bộ phận hỗ trợ.",
     "refreshButton": "Thử lại",
     "refreshPageDescription": "Làm mới trang để thử lại. Nếu sự cố vẫn tiếp diễn, hãy liên hệ với bộ phận hỗ trợ.",
+    "sessionExpired": "Phiên đã hết hạn",
     "sheetNotFound": "Không tìm thấy trang tính",
     "spaceNotFound": "Không tìm thấy không gian",
     "unauthorized": "Thông tin truy cập của bạn không hợp lệ.",
@@ -375,6 +389,9 @@
       "heading": "Bản xem trước dữ liệu cho {{previewKey}}",
       "noData": "Không có dữ liệu xem trước"
     },
+    "dropdown": {
+      "placeholder": "Chọn..."
+    },
     "headerButtons": {
       "back": "Quay lại",
       "exit": "Thoát",
@@ -394,10 +411,10 @@
         "noData": "Ô không có dữ liệu",
         "noDataTooltip": "Bạn có thể chọn một tùy chọn hợp lệ để điền vào tất cả các ô trống. Bạn cũng có thể để trống phần này."
       },
-      "progressPill_other": "Đã ánh xạ {{mappedCount}} trên {{totalCount}} giá trị",
-      "progressPill_zero": "Đã ánh xạ {{mappedCount}} trên {{totalCount}} giá trị",
-      "progressPillAllMapped_other": "Đã ánh xạ {{totalCount}} giá trị",
-      "progressPillAllMapped_zero": "Đã ánh xạ {{totalCount}} giá trị",
+      "progressPill_other": "Đã ánh xạ {{mappedCount}} trên {{count}} giá trị",
+      "progressPill_zero": "Đã ánh xạ {{mappedCount}} trên {{count}} giá trị",
+      "progressPillAllMapped_other": "Đã ánh xạ {{count}} giá trị",
+      "progressPillAllMapped_zero": "Đã ánh xạ {{count}} giá trị",
       "subheading": "Những trường dữ liệu này có giá trị phải được ánh xạ tới danh sách các tùy chọn hợp lệ.",
       "title": "Ánh xạ Trường dữ liệu"
     },
@@ -537,6 +554,9 @@
         },
         "messages": {
           "autogen": "✨ Được tạo tự động",
+          "compositeUnique": "🧑‍🍳 Hỗn hợp {{name}} không độc nhất",
+          "invalidOption": "Tùy chọn hợp lệ",
+          "invalidValue": "Giá trị không phải là tùy chọn hợp lệ",
           "reference": "Giá trị không tồn tại trong bảng tham chiếu",
           "req": "{{field}} là nội dung bắt buộc",
           "transformed": "🪄️ Được biến đổi từ {{originalValue}}",
@@ -791,6 +811,7 @@
         "tooltip": "Nhấn enter để tìm kiếm"
       },
       "tooltips": {
+        "lockedUntilEditingCompletes": "Thanh công cụ sẽ khả dụng khi bạn ngừng chỉnh sửa trang tính",
         "lockedUntilHookCompletes": "Thanh công cụ sẽ khả dụng sau khi tất cả các hook chạy xong",
         "lockedUntilJobCompletes": "Thanh công cụ sẽ khả dụng sau khi công việc hiện tại hoàn thành"
       }
@@ -798,6 +819,7 @@
     "workbookActions": {
       "disabledTooltip": {
         "hasData": "Bạn sẽ có thể thực hiện hành động này khi Sổ làm việc này có ít nhất một bản ghi.",
+        "lockedUntilEditingCompletes": "Hành động sẽ khả dụng khi bạn ngừng chỉnh sửa trang tính",
         "lockedUntilHookCompletes": "Hành động này sẽ khả dụng sau khi mọi hook đã chạy xong",
         "lockedUntilJobCompletes": "Hành động này sẽ khả dụng sau khi công việc hiện tại được hoàn tất",
         "requireAllValid": "Hành động này yêu cầu mọi hàng trong tất cả các trang tính phải hợp lệ"
@@ -878,9 +900,60 @@
         "accept": "Nếu bạn chấp nhận các thay đổi, tất cả giá trị mới sẽ được hợp nhất vào tập dữ liệu của bạn.",
         "current": "Giá trị hiện tại: {{value}}",
         "empty": "không có dữ liệu",
+        "none": "Bộ dữ liệu của bạn sẽ được điều chỉnh theo những giá trị được hiển thị.",
         "restore": "Tập dữ liệu của bạn sẽ được khôi phục về phiên bản trong ảnh chụp nhanh này.",
         "snapshot": "Giá trị mới: {{value}}"
       }
+    },
+    "none": {
+      "empty": {
+        "createdSince": "Không bản ghi nào sẽ bị xóa.",
+        "deletedSince": "Không bản ghi nào sẽ được bổ sung.",
+        "title": "Không có gì cả!",
+        "updatedSince": "Không bản ghi nào sẽ được điều chỉnh."
+      },
+      "errorMessage": "Không thể xem trước thay đổi do xảy ra lỗi ngoài dự kiến.",
+      "filters": {
+        "createdSince": "Xóa",
+        "deletedSince": "Thêm",
+        "updatedSince": "Điều chỉnh"
+      },
+      "header": {
+        "title": "Các thay đổi đã thực hiện trong",
+        "titleWithMeta": "Xem lại các thay đổi trong <1>{{sheet}}</1>"
+      },
+      "message": "Bảng dưới hiển thị những thay đổi đã được thực hiện trên trang tính {{name}} của bạn.",
+      "submitError": "Không thể chuyển đổi dữ liệu do xảy ra lỗi ngoài dự kiến.",
+      "submitSuccess": "Đã áp dụng thay đổi trên trang tính của bạn thành công.",
+      "successMessage": "Đã áp dụng thay đổi trên trang tính của bạn.",
+      "summary": {
+        "fields": {
+          "plural": {
+            "first": "{{cells}} ô trong miền {{name}}",
+            "last": " và {{cells}} ô trong miền {{name}}",
+            "middle": ", {{cells}} ô trong miền {{name}}"
+          },
+          "singular": {
+            "first": "1 ô trong miền {{name}}",
+            "last": " và 1 ô trong miền {{name}}",
+            "middle": ", 1 ô trong miền {{name}}"
+          },
+          "start": " Dữ liệu sẽ được điều chỉnh trong "
+        },
+        "total": {
+          "plural": {
+            "multipleFields": "Dữ liệu sẽ thay đổi trong {{records}} bản ghi trên {{fields}} miền.",
+            "noFields": "Dữ liệu sẽ thay đổi trong {{records}} bản ghi.",
+            "oneField": "Dữ liệu sẽ thay đổi trong {{records}} bản ghi trên 1 miền."
+          },
+          "singular": {
+            "multipleFields": "Dữ liệu sẽ thay đổi trong 1 bản ghi trên {{fields}} miền.",
+            "noFields": "Dữ liệu sẽ thay đổi trong 1 bản ghi.",
+            "oneField": "Dữ liệu sẽ thay đổi trong 1 bản ghi trên 1 miền."
+          }
+        }
+      },
+      "title": "Xem trước những thay đổi được thực hiện trong"
     },
     "preview": {
       "cancelButton": "Hủy bỏ",

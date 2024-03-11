@@ -1,4 +1,17 @@
 {
+  "blocks": {
+    "embeddedDiff": {
+      "errors": {
+        "invalidDirection": "Geçersiz 'yön' özelliği nedeniyle Embedded Diff oluşturulamıyor. Geçerli değerler şunlardır: 'sheet_to_snapshot', 'snapshot_to_sheet'",
+        "missingIds": "Eksik Sayfa, Çalışma Kitabı veya Anlık Görüntü NO nedeniyle Embedded Diff oluşturulamıyor"
+      }
+    },
+    "embeddedSheet": {
+      "errors": {
+        "missingIds": "Eksik Sayfa veya Çalışma Kitabı NO nedeniyle Ekli Sayfa oluşturulamıyor."
+      }
+    }
+  },
   "checklist": {
     "dropdowns": {
       "headings": {
@@ -132,6 +145,7 @@
     "notFoundPageDescription": "Bu URL'de sayfa bulunmuyor. Bu beklenmedik bir durumsa lütfen destek ekibiyle iletişime geçin.",
     "refreshButton": "Yeniden dene",
     "refreshPageDescription": "Tekrar denemek için sayfayı yenileyin. Sorun devam ederse destek ekimize başvurun.",
+    "sessionExpired": "Oturumun süresi doldu",
     "sheetNotFound": "Çalışma sayfası bulunamadı",
     "spaceNotFound": "Alan bulunamadı",
     "unauthorized": "Erişim bilgileriniz geçersiz.",
@@ -380,6 +394,9 @@
       "heading": "{{previewKey}} için veri önizlemesi",
       "noData": "Önizleme verisi yok"
     },
+    "dropdown": {
+      "placeholder": "Seç..."
+    },
     "headerButtons": {
       "back": "Geri",
       "exit": "Çık",
@@ -399,12 +416,12 @@
         "noData": "Veri içermeyen hücreler",
         "noDataTooltip": "Tüm boş hücreleri doldurmak için geçerli bir seçenek belirleyebilirsiniz. Burayı boş da bırakabilirsiniz."
       },
-      "progressPill_one": "{{mappedCount}} / {{totalCount}} değer eşlendi",
-      "progressPill_other": "{{mappedCount}} / {{totalCount}} değer eşlendi",
-      "progressPill_zero": "{{mappedCount}} / {{totalCount}} değer eşlendi",
-      "progressPillAllMapped_one": "{{totalCount}} değer eşlendi",
-      "progressPillAllMapped_other": "{{totalCount}} değer eşlendi",
-      "progressPillAllMapped_zero": "{{totalCount}} değer eşlendi",
+      "progressPill_one": "{{mappedCount}} / {{count}} değer eşlendi",
+      "progressPill_other": "{{mappedCount}} / {{count}} değer eşlendi",
+      "progressPill_zero": "{{mappedCount}} / {{count}} değer eşlendi",
+      "progressPillAllMapped_one": "{{count}} değer eşlendi",
+      "progressPillAllMapped_other": "{{count}} değer eşlendi",
+      "progressPillAllMapped_zero": "{{count}} değer eşlendi",
       "subheading": "Bu alanlar, geçerli seçenekler listesiyle eşleştirilmesi gereken değerlere sahip.",
       "title": "Harita Alanları"
     },
@@ -554,6 +571,9 @@
         },
         "messages": {
           "autogen": "✨ Otomatik olarak oluşturuldu",
+          "compositeUnique": "🧑‍🍳 Kompozit {{name}} benzersiz değil",
+          "invalidOption": "Geçersiz seçenek",
+          "invalidValue": "Değer, geçerli bir seçenek değil",
           "reference": "Değer, referans tablosunda mevcut değil",
           "req": "{{field}} gereklidir",
           "transformed": "🪄️ {{originalValue}} değerinden dönüştürüldü",
@@ -816,6 +836,7 @@
         "tooltip": "Aramak için enter tuşuna basın"
       },
       "tooltips": {
+        "lockedUntilEditingCompletes": "Araç çubuğu, sayfa artık düzenlenmediğinde kullanılabilir olacaktır",
         "lockedUntilHookCompletes": "Araç çubuğu tüm kancaların çalışması bittikten sonra kullanılabilir olacaktır",
         "lockedUntilJobCompletes": "Araç çubuğu mevcut iş tamamlandıktan sonra kullanılabilir olacaktır"
       }
@@ -823,6 +844,7 @@
     "workbookActions": {
       "disabledTooltip": {
         "hasData": "Bu eylem, bu Çalışma Kitabında en az bir kayıt olduğunda geçerli olacaktır.",
+        "lockedUntilEditingCompletes": "Eylem, sayfa artık düzenlenmediğinde kullanılabilir olacaktır",
         "lockedUntilHookCompletes": "Bu eylem, tüm kancaların çalışması bittikten sonra kullanılabilir olacak",
         "lockedUntilJobCompletes": "Bu eylem, geçerli iş tamamlandıktan sonra kullanılabilir olacak",
         "requireAllValid": "Bu eylem tüm sayfalardaki tüm satırların geçerli olmasını gerektiriyor."
@@ -903,9 +925,60 @@
         "accept": "Değişiklikleri kabul ederseniz, tüm yeni değerler veri setiniz içinde birleştirilecektir.",
         "current": "Mevcut değer: {{value}}",
         "empty": "veri yok",
+        "none": "Veri kümeniz gösterilen değerlere göre değiştirilecektir.",
         "restore": "Veri kümen bu anlık görüntüdeki sürüme geri yüklenecek.",
         "snapshot": "Yeni değer: {{value}}"
       }
+    },
+    "none": {
+      "empty": {
+        "createdSince": "Hiçbir kayıt kaldırılmayacaktır.",
+        "deletedSince": "Hiçbir kayıt eklenmeyecektir.",
+        "title": "Görülecek hiçbirşey yok!",
+        "updatedSince": "Hiçbir kayıt değiştirilmeyecektir."
+      },
+      "errorMessage": "Beklenmeyen bir hata nedeniyle değişikliklerin ön izlemesi yapılamadı.",
+      "filters": {
+        "createdSince": "Kaldır",
+        "deletedSince": "Ekle",
+        "updatedSince": "Değiştir"
+      },
+      "header": {
+        "title": "Şurada yapılan değişiklikler:",
+        "titleWithMeta": "<1>{{sheet}}</1> sayfasındaki değişiklikleri incele"
+      },
+      "message": "Aşağıdaki tablo, {{name}} sayfanızdaki değişiklikleri göstermektedir.",
+      "submitError": "Beklenmeyen bir hata nedeniyle veriler dönüştürülemedi.",
+      "submitSuccess": "Sayfanızda yapılan değişiklikler başarıyla uygulandı.",
+      "successMessage": "Değişiklikler sayfanıza uygulandı.",
+      "summary": {
+        "fields": {
+          "plural": {
+            "first": "{{name}} alanındaki {{cells}} hücre",
+            "last": " ve {{name}} alanındaki {{cells}} hücre",
+            "middle": ", {{name}} alanındaki {{cells}} hücre"
+          },
+          "singular": {
+            "first": "{{name}} alanında 1 hücre",
+            "last": " ve {{name}} alanında 1 hücre",
+            "middle": ", {{name}} alanında 1 hücre"
+          },
+          "start": " Veriler şurada değiştirilecek: "
+        },
+        "total": {
+          "plural": {
+            "multipleFields": "{{fields}} alan {{records}} kayıttaki veriler değişecek.",
+            "noFields": "{{records}} kayıttaki veriler değişecek.",
+            "oneField": "1 alandaki {{records}} kayıttaki veriler değişecek."
+          },
+          "singular": {
+            "multipleFields": "Veriler, {{fields}} alanda 1 kayıtta değişecek.",
+            "noFields": "Veriler 1 kayıtta değişecek.",
+            "oneField": "Veriler 1 alanda 1 kayıtta değişecek."
+          }
+        }
+      },
+      "title": "Şurada yapılan değişiklikleri ön izle:"
     },
     "preview": {
       "cancelButton": "İptal Et",

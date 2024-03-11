@@ -1,4 +1,17 @@
 {
+  "blocks": {
+    "embeddedDiff": {
+      "errors": {
+        "invalidDirection": "Unable to create Embedded Diff due to invalid 'direction' property. Valid values are: 'sheet_to_snapshot', 'snapshot_to_sheet'",
+        "missingIds": "Unable to create Embedded Diff due to missing Sheet, Workbook, or Snapshot ID"
+      }
+    },
+    "embeddedSheet": {
+      "errors": {
+        "missingIds": "Unable to create Embedded Sheet due to missing Sheet or Workbook ID."
+      }
+    }
+  },
   "checklist": {
     "dropdowns": {
       "headings": {
@@ -71,6 +84,7 @@
           "invalidFunctionError": "Sorry, the AI assistant is unable to perform that transformation. Most likely you asked it to do something invalid.",
           "keysModifiedError": "Sorry, the AI assistant can only modify the values of existing fields. It cannot remove fields or add new ones.",
           "noFunctionError": "I didn't understand your request. Try phrasing it differently.",
+          "noRecordsFoundError": "You must have some records in your (filtered) sheet in order to use the AI assistant.",
           "readOnlyError": "This sheet is currently set to ‘Read-Only’ mode, which prevents any data transformation actions. Please ensure you have edit permissions or switch to a modifiable sheet to perform this operation.",
           "versionError": "Unable to create a rollback version - AI transform aborted. Please try again."
         },
@@ -131,6 +145,7 @@
     "notFoundPageDescription": "No page exists at this URL. If this is unexpected, please contact support.",
     "refreshButton": "Retry",
     "refreshPageDescription": "Refresh the page to try again. If the problem persists, contact support.",
+    "sessionExpired": "Session has expired",
     "sheetNotFound": "Sheet not found",
     "spaceNotFound": "Space not found",
     "unauthorized": "Your access credentials are invalid.",
@@ -375,6 +390,9 @@
       "heading": "Data preview for {{previewKey}}",
       "noData": "No preview data"
     },
+    "dropdown": {
+      "placeholder": "Select..."
+    },
     "headerButtons": {
       "back": "Back",
       "exit": "Exit",
@@ -394,10 +412,10 @@
         "noData": "Cells with no data",
         "noDataTooltip": "You can select a valid option to populate all empty cells. You can also leave this blank."
       },
-      "progressPill_one": "{{mappedCount}} of {{totalCount}} value mapped",
-      "progressPill_other": "{{mappedCount}} of {{totalCount}} values mapped",
-      "progressPillAllMapped_one": "{{totalCount}} values mapped",
-      "progressPillAllMapped_other": "{{totalCount}} value mapped",
+      "progressPill_one": "{{mappedCount}} of {{count}} value mapped",
+      "progressPill_other": "{{mappedCount}} of {{count}} values mapped",
+      "progressPillAllMapped_one": "{{count}} values mapped",
+      "progressPillAllMapped_other": "{{count}} value mapped",
       "subheading": "These fields have values that must be mapped to a list of valid options.",
       "title": "Map Fields"
     },
@@ -538,6 +556,9 @@
         },
         "messages": {
           "autogen": "✨ Automatically generated",
+          "compositeUnique": "🧑‍🍳 Composite {{name}} is not unique",
+          "invalidOption": "Invalid option",
+          "invalidValue": "Value is not a valid option",
           "reference": "Value does not exist in the reference table",
           "req": "{{field}} is required",
           "transformed": "🪄️ Transformed from {{originalValue}}",
@@ -792,6 +813,7 @@
         "tooltip": "Hit enter to search"
       },
       "tooltips": {
+        "lockedUntilEditingCompletes": "The toolbar will be available when the sheet is no longer being edited",
         "lockedUntilHookCompletes": "The toolbar will be available after all hooks finish running",
         "lockedUntilJobCompletes": "The toolbar will be available after the current job completes"
       }
@@ -799,6 +821,7 @@
     "workbookActions": {
       "disabledTooltip": {
         "hasData": "This action will be available once there is at least one record in this Workbook.",
+        "lockedUntilEditingCompletes": "The action will be available when the sheet is no longer being edited",
         "lockedUntilHookCompletes": "This action will be available after all hooks finish running",
         "lockedUntilJobCompletes": "This action will be available after the current job completes",
         "requireAllValid": "This action requires all rows in all sheets to be valid"
@@ -879,9 +902,60 @@
         "accept": "If you accept changes, all new values will be merged into your dataset.",
         "current": "Current value: {{value}}",
         "empty": "no data",
+        "none": "Your dataset will be modified to the values shown.",
         "restore": "Your dataset will be restored to the version in this snapshot.",
         "snapshot": "New value: {{value}}"
       }
+    },
+    "none": {
+      "empty": {
+        "createdSince": "No records will be removed.",
+        "deletedSince": "No records will be added.",
+        "title": "Nothing to see!",
+        "updatedSince": "No records will be modified."
+      },
+      "errorMessage": "The changes could not be previewed due to an unexpected error.",
+      "filters": {
+        "createdSince": "Add",
+        "deletedSince": "Remove",
+        "updatedSince": "Modify"
+      },
+      "header": {
+        "title": "Changes made in",
+        "titleWithMeta": "Review changes to <1>{{sheet}}</1>"
+      },
+      "message": "The table below shows the changes to your sheet {{name}}.",
+      "submitError": "The data could not be transformed due to an unexpected error.",
+      "submitSuccess": "Changes to your sheet were successfully applied.",
+      "successMessage": "Changes were applied to your sheet.",
+      "summary": {
+        "fields": {
+          "plural": {
+            "first": "{{cells}} cells in field {{name}}",
+            "last": " and {{cells}} cells in field {{name}}",
+            "middle": ", {{cells}} cells in field {{name}}"
+          },
+          "singular": {
+            "first": "1 cell in field {{name}}",
+            "last": " and 1 cell in field {{name}}",
+            "middle": ", 1 cell in field {{name}}"
+          },
+          "start": " Data will be modified in "
+        },
+        "total": {
+          "plural": {
+            "multipleFields": "Data will change in {{records}} records across {{fields}} fields.",
+            "noFields": "Data will change in {{records}} records.",
+            "oneField": "Data will change in {{records}} records across 1 field."
+          },
+          "singular": {
+            "multipleFields": "Data will change in 1 record across {{fields}} fields.",
+            "noFields": "Data will change in 1 record.",
+            "oneField": "Data will change in 1 record across 1 field."
+          }
+        }
+      },
+      "title": "Preview changes made in"
     },
     "preview": {
       "cancelButton": "Cancel",
